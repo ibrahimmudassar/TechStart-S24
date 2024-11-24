@@ -10,7 +10,7 @@ import { Link } from "@nextui-org/link";
 export default function IndexPage() {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, error, isLoading } = useSWR(
-    "http://127.0.0.1:5000/get_hospitals",
+    "https://techstart-s24.onrender.com/get_hospitals",
     fetcher,
     { fallbackData: [{ name: "yo" }] }
   );
