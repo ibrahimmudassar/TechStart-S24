@@ -36,11 +36,44 @@ def hello():
     ]
 
 
+# @app.route("/get_service_history", methods=["GET"])
+# @cross_origin()
+def service_history():
+
+    final = []
+
+    for _ in range(randint(10, 21)):
+        final.append(
+            {
+                "date": random_date(
+                    datetime.strptime("1/1/2008", "%m/%d/%Y"),
+                    datetime.now(),
+                ),
+                "price": round(uniform(100, 10000), 2),
+            }
+        )
+
+    return final
+
+
+def random_date(start, end):
+    """
+    This function will return a random datetime between two datetime
+    objects.
+    """
+    delta = end - start
+    int_delta = (delta.days * 24 * 60 * 60) + delta.seconds
+    random_second = randrange(int_delta)
+    new = start + timedelta(seconds=random_second)
+
+    return new.isoformat()
+
+
 @app.route("/get_hospital_services", methods=["GET"])
 @cross_origin()
 def services():
 
-    return [
+    final = [
         {"name": "Abdomen Ultrasound", "price": 800.0},
         {"name": "Brain MRI", "price": 2370.0},
         {"name": "Chest X-ray", "price": 400.0},
@@ -63,35 +96,7 @@ def services():
         {"name": "ACL Repair", "price": 9446.0},
     ]
 
-
-def random_date(start, end):
-    """
-    This function will return a random datetime between two datetime
-    objects.
-    """
-    delta = end - start
-    int_delta = (delta.days * 24 * 60 * 60) + delta.seconds
-    random_second = randrange(int_delta)
-    new = start + timedelta(seconds=random_second)
-
-    return new.isoformat()
-
-
-@app.route("/get_service_history", methods=["GET"])
-@cross_origin()
-def service_history():
-
-    final = []
-
-    for _ in range(randint(10, 21)):
-        final.append(
-            {
-                "date": random_date(
-                    datetime.strptime("1/1/2008", "%m/%d/%Y"),
-                    datetime.now(),
-                ),
-                "price": round(uniform(100, 10000), 2),
-            }
-        )
+    for i in final:
+        i["history"] = service_history()
 
     return final
