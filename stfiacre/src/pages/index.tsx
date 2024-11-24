@@ -50,15 +50,12 @@ export default function IndexPage() {
             className="max-w-xs"
           >
             {data.map((item, i) => (
-              <AutocompleteItem key={item.name}>
-                <Button
-                  as={Link}
-                  href={`/hospitals/` + item.link}
-                  variant="light"
-                  color="danger"
-                >
-                  {item.name}
-                </Button>
+              <AutocompleteItem
+                key={item.name}
+                as={Link}
+                href={`/hospitals/` + item.link}
+              >
+                {item.name}
               </AutocompleteItem>
             ))}
           </Autocomplete>

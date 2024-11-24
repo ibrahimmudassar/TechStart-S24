@@ -1,4 +1,5 @@
-from datetime import timedelta, datetime
+import time
+from datetime import datetime, timedelta
 from random import randint, randrange, uniform
 
 from flask import Flask, Response, request
@@ -42,7 +43,7 @@ def service_history():
 
     final = []
 
-    for _ in range(randint(10, 21)):
+    for _ in range(randint(5, 11)):
         final.append(
             {
                 "date": random_date(
